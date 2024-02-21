@@ -1,3 +1,12 @@
+# Orcacoin-JS
+Group: Sacabambaspis   
+Members: Fia Hali, MingRong Hou, Andi Chen
+
+This repo runs an alternative Bitcoin network by modifying bitcoinjs-lib written in JavaScript
+
+Task road map: https://docs.google.com/document/d/1b-hXV2IiaeDMTyBUL2uW_WpoN8P16IETHOEhl9Byc1s/edit
+
+
 # BitcoinJS (bitcoinjs-lib)
 [![Github CI](https://github.com/bitcoinjs/bitcoinjs-lib/actions/workflows/main_ci.yml/badge.svg)](https://github.com/bitcoinjs/bitcoinjs-lib/actions/workflows/main_ci.yml) [![NPM](https://img.shields.io/npm/v/bitcoinjs-lib.svg)](https://www.npmjs.org/package/bitcoinjs-lib) [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
