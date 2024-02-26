@@ -4,50 +4,17 @@ Members: Fia Hali, MingRong Hou, Andi Chen
 
 This repo runs an alternative Bitcoin network by modifying bitcoinjs-lib written in JavaScript
 
-Task road map: https://docs.google.com/document/d/1b-hXV2IiaeDMTyBUL2uW_WpoN8P16IETHOEhl9Byc1s/edit
+416 road map: [here](https://docs.google.com/document/d/1b-hXV2IiaeDMTyBUL2uW_WpoN8P16IETHOEhl9Byc1s/edit)    
+task doc: [here](https://docs.google.com/document/d/1yNJvHiGFe1wqBNVgRsthBA4PbpDuXnZKcVQ9PPgL_H4/edit)
 
 
-# BitcoinJS (bitcoinjs-lib)
+
+## BitcoinJS (bitcoinjs-lib)
 [![Github CI](https://github.com/bitcoinjs/bitcoinjs-lib/actions/workflows/main_ci.yml/badge.svg)](https://github.com/bitcoinjs/bitcoinjs-lib/actions/workflows/main_ci.yml) [![NPM](https://img.shields.io/npm/v/bitcoinjs-lib.svg)](https://www.npmjs.org/package/bitcoinjs-lib) [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
 A javascript Bitcoin library for node.js and browsers. Written in TypeScript, but committing the JS files to verify.
 
 Released under the terms of the [MIT LICENSE](LICENSE).
-
-## Should I use this in production?
-If you are thinking of using the *master* branch of this library in production, **stop**.
-Master is not stable; it is our development branch, and [only tagged releases may be classified as stable](https://github.com/bitcoinjs/bitcoinjs-lib/tags).
-
-## Can I trust this code?
-> Don't trust. Verify.
-
-We recommend every user of this library and the [bitcoinjs](https://github.com/bitcoinjs) ecosystem audit and verify any underlying code for its validity and suitability,  including reviewing any and all of your project's dependencies.
-
-Mistakes and bugs happen, but with your help in resolving and reporting [issues](https://github.com/bitcoinjs/bitcoinjs-lib/issues), together we can produce open source software that is:
-
-- Easy to audit and verify,
-- Tested, with test coverage >95%,
-- Advanced and feature rich,
-- Standardized, using [prettier](https://github.com/prettier/prettier) and Node `Buffer`'s throughout, and
-- Friendly, with a strong and helpful community, ready to answer questions.
-
-## Documentation
-Presently,  we do not have any formal documentation other than our [examples](#examples), please [ask for help](https://github.com/bitcoinjs/bitcoinjs-lib/issues/new) if our examples aren't enough to guide you.
-
-You can find a [Web UI](https://bitcoincore.tech/apps/bitcoinjs-ui/index.html) that covers most of the `psbt.ts`, `transaction.ts` and `p2*.ts` APIs [here](https://bitcoincore.tech/apps/bitcoinjs-ui/index.html).
-
-## How can I contact the developers outside of Github?
-**Most of the time, this is not appropriate. Creating issues and pull requests in the open will help others with similar issues, so please try to use public issues and pull requests for communication.**
-
-That said, sometimes developers might be open to taking things off the record (ie. You want to share code that you don't want public to get help with it). In that case, please negotiate on the public issues as to where you will contact.
-
-We have created public rooms on IRC (`#bitcoinjs` on `libera.chat`) and Matrix (`#bitcoinjs-dev:matrix.org`). These two channels have been joined together in a Matrix "Space" which has the Matrix room AND an IRC bridge room that can converse with the IRC room. The "Space" is `#bitcoinjs-space:matrix.org`.
-
-Matrix and IRC both have functions for direct messaging, but IRC is not end to end encrypted, so Matrix is recommended for most communication. The official Matrix client maintained by the Matrix core team is called "Element" and can be downloaded here: https://element.io/download (Account creation is free on the matrix.org server, which is the default setting for Element.)
-
-We used to have a Slack. It is dead. If you find it, no one will answer you most likely.
-
-No we will not make a Discord.
 
 ## Installation
 ``` bash
@@ -58,19 +25,7 @@ npm install ecpair bip32
 # bip32 is for generating HD keys
 ```
 
-Previous versions of the library included classes for key management (ECPair, HDNode(->"bip32")) but now these have been separated into different libraries. This lowers the bundle size significantly if you don't need to perform any crypto functions (converting private to public keys and deriving HD keys).
-
-Typically we support the [Node Maintenance LTS version](https://github.com/nodejs/Release). TypeScript target will be set
-to the ECMAScript version in which all features are fully supported by current Active Node LTS.
-However, depending on adoption among other environments (browsers etc.) we may keep the target back a year or two.
-If in doubt, see the [main_ci.yml](.github/workflows/main_ci.yml) for what versions are used by our continuous integration tests.
-
-**WARNING**: We presently don't provide any tooling to verify that the release on `npm` matches GitHub.  As such, you should verify anything downloaded by `npm` against your own verified copy.
-
-
 ## Usage
-Crypto is hard.
-
 When working with private keys, the random number generator is fundamentally one of the most important parts of any software you write.
 For random number generation, we *default* to the [`randombytes`](https://github.com/crypto-browserify/randombytes) module, which uses [`window.crypto.getRandomValues`](https://developer.mozilla.org/en-US/docs/Web/API/window.crypto.getRandomValues) in the browser, or Node js' [`crypto.randomBytes`](https://nodejs.org/api/crypto.html#crypto_crypto_randombytes_size_callback), depending on your build system.
 Although this default is ~OK, there is no simple way to detect if the underlying RNG provided is good enough, or if it is **catastrophically bad**.
@@ -83,9 +38,6 @@ Often, Javascript itself is working against us by bypassing these counter-measur
 Problems in [`Buffer (UInt8Array)`](https://github.com/feross/buffer), for example, can trivially result in **catastrophic fund loss** without any warning.
 It can do this through undermining your random number generation, accidentally producing a [duplicate `k` value](https://www.nilsschneider.net/2013/01/28/recovering-bitcoin-private-keys.html), sending Bitcoin to a malformed output script, or any of a million different ways.
 Running tests in your target environment is important and a recommended step to verify continuously.
-
-Finally, **adhere to best practice**.
-We are not an authoritative source of best practice, but, at the very least:
 
 * [Don't reuse addresses](https://en.bitcoin.it/wiki/Address_reuse).
 * Don't share BIP32 extended public keys ('xpubs'). [They are a liability](https://bitcoin.stackexchange.com/questions/56916/derivation-of-parent-private-key-from-non-hardened-child), and it only takes 1 misplaced private key (or a buggy implementation!) and you are vulnerable to **catastrophic fund loss**.
@@ -111,19 +63,12 @@ Which you can then import as an ESM module:
 <script type="module">import "/scripts/bitcoinjs-lib.js"</script>
 ````
 
-**NOTE**: We use Node Maintenance LTS features, if you need strict ES5, use [`--transform babelify`](https://github.com/babel/babelify) in conjunction with your `browserify` step (using an [`es2015`](https://babeljs.io/docs/plugins/preset-es2015/) preset).
-
 **WARNING**: iOS devices have [problems](https://github.com/feross/buffer/issues/136), use at least [buffer@5.0.5](https://github.com/feross/buffer/pull/155) or greater,  and enforce the test suites (for `Buffer`, and any other dependency) pass before use.
 
 ### Typescript or VSCode users
 Type declarations for Typescript are included in this library. Normal installation should include all the needed type information.
 
 ## Examples
-The below examples are implemented as integration tests, they should be very easy to understand.
-Otherwise, pull requests are appreciated.
-Some examples interact (via HTTPS) with a 3rd Party Blockchain Provider (3PBP).
-
-
 - [Taproot Key Spend](https://github.com/bitcoinjs/bitcoinjs-lib/blob/master/test/integration/taproot.spec.ts)
 - [Generate a random address](https://github.com/bitcoinjs/bitcoinjs-lib/blob/master/test/integration/addresses.spec.ts)
 - [Import an address via WIF](https://github.com/bitcoinjs/bitcoinjs-lib/blob/master/test/integration/addresses.spec.ts)
@@ -162,11 +107,6 @@ Some examples interact (via HTTPS) with a 3rd Party Blockchain Provider (3PBP).
 - [Create (and broadcast via 3PBP) a Transaction where Alice (mediator) can send after 5 blocks (complex CHECKSEQUENCEVERIFY)](https://github.com/bitcoinjs/bitcoinjs-lib/blob/master/test/integration/csv.spec.ts)
 
 If you have a use case that you feel could be listed here, please [ask for it](https://github.com/bitcoinjs/bitcoinjs-lib/issues/new)!
-
-
-## Contributing
-See [CONTRIBUTING.md](CONTRIBUTING.md).
-
 
 ### Running the test suite
 
